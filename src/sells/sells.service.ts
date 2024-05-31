@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSellDto } from './dto/create-sell.dto';
 import { UpdateSellDto } from './dto/update-sell.dto';
+import { Sell } from './entities/sell.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, MoreThanOrEqual  } from 'typeorm';
 
 @Injectable()
 export class SellsService {
+  constructor(
+    @InjectRepository(Sell)
+    private readonly sellRepository: Repository<Sell>
+  ) {}
+
   create(createSellDto: CreateSellDto) {
     return 'This action adds a new sell';
   }
@@ -23,4 +31,9 @@ export class SellsService {
   remove(id: number) {
     return `This action removes a #${id} sell`;
   }
+
+
+
+
+
 }

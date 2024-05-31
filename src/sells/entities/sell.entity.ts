@@ -7,13 +7,17 @@ export class Sell {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  author: string;
 
-  @ManyToOne(() => Book)
+  @Column()
+  customer: string;
+
+  @Column()
+  saleDate: Date;
+
+  @ManyToOne(() => Book, book => book.sell)
   book: Book;
 
   @DeleteDateColumn()
-  deleteAt: Date;
+  deletedAt?: Date;
 
 }

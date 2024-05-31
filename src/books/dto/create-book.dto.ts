@@ -1,14 +1,15 @@
 import {
+  IsInt,
     IsString,
   } from 'class-validator';
   
   export class CreateBookDto {
     @IsString()
-    author: string;
+    title: string;
 
+    
     @IsString()
-    nameOfBook: string;
-
+    author: string;
 
   }
   
