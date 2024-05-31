@@ -1,20 +1,36 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSellDto } from './dto/create-sell.dto';
 import { UpdateSellDto } from './dto/update-sell.dto';
 import { Sell } from './entities/sell.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, MoreThanOrEqual  } from 'typeorm';
+import { Book } from 'src/books/entities/book.entity';
 
 @Injectable()
 export class SellsService {
   constructor(
     @InjectRepository(Sell)
-    private readonly sellRepository: Repository<Sell>
+    private sellRepository: Repository<Sell>,
+    @InjectRepository(Book)
+    private bookRepository: Repository<Book>,
   ) {}
 
-  create(createSellDto: CreateSellDto) {
-    return 'This action adds a new sell';
+  async create(createSellDto: CreateSellDto): Promise<Sell> {
+    const { customer, bookId } = createSellDto;
+
+    const book = await this.bookRepository.findOne({ where: { id: bookId } });
+    if (!book) {
+      throw new NotFoundException('Book not found');
+    }
+
+    const sell = new Sell();
+    sell.customer = customer;
+    sell.book = book;
+
+    return this.sellRepository.save(sell);
   }
+
+
 
   findAll() {
     return `This action returns all sells`;
