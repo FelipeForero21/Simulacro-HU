@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "aab05caf-5c34-4b81-93b1-f45a23547df1",
+		"name": "Simulacro-hu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33509084",
+		"_collection_link": "https://blue-flare-210817.postman.co/workspace/My-Workspace~931d3d74-1254-45cc-8136-433563407235/collection/33509084-aab05caf-5c34-4b81-93b1-f45a23547df1?action=share&source=collection_link&creator=33509084"
+	},
+	"item": [
+		{
+			"name": "author",
+			"item": [
+				{
+					"name": "createAuthor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"author\": \"mario\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/authors/createAuthor"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/authors/all"
+					},
+					"response": []
+				},
+				{
+					"name": "SoftDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/authors/softDelete/1"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"author\": \"carlos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/authors/update/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "CreateBook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"El Principito\",\r\n    \"author\": \"Gabriel Garcia Marquez\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/books/createBook"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/books/all"
+					},
+					"response": []
+				},
+				{
+					"name": "SoftDelete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/books/softDelete/"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"El Principito 2\",\r\n    \"author\": \"Principe Felipe 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/books/update/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sell",
+			"item": [
+				{
+					"name": "Create Sell",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": \"no tiene nombre\",\r\n    \"bookId\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/sells/newSell"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Sells",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/sells/all"
+					},
+					"response": []
+				},
+				{
+					"name": "SoftDelete Sell",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/sells/softDelete/1"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
