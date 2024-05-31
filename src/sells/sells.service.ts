@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { CreateSellDto } from './dto/create-sell.dto';
 import { UpdateSellDto } from './dto/update-sell.dto';
 import { Sell } from './entities/sell.entity';
@@ -16,10 +20,17 @@ export class SellsService {
     private bookRepository: Repository<Book>,
   ) {}
 
-  @ApiOperation({ summary: 'Create a new sell' }) // Documenta el método create
+  @ApiOperation({ summary: 'Create a new sell' })
   @ApiBody({ type: CreateSellDto })
   async create(createSellDto: CreateSellDto): Promise<Sell> {
     const { customer, bookId } = createSellDto;
+
+    const currentHour = new Date().getHours();
+    if (currentHour >= 18 || currentHour < 6) {
+      throw new ForbiddenException(
+        'Orders cannot be processed between 6pm and 6am',
+      );
+    }
 
     const book = await this.bookRepository.findOne({ where: { id: bookId } });
     if (!book) {
@@ -33,16 +44,17 @@ export class SellsService {
     return this.sellRepository.save(sell);
   }
 
-  @ApiOperation({ summary: 'Get all sells' }) 
+  @ApiOperation({ summary: 'Get all sells' })
   async findAll(): Promise<Sell[]> {
     return this.sellRepository.find({
       relations: ['book'],
     });
   }
 
-  @ApiOperation({ summary: 'Soft delete sell by ID' }) 
+  @ApiOperation({ summary: 'Soft delete sell by ID' })
   @ApiParam({ name: 'id', type: 'number', description: 'Sell ID' })
   remove(id: number) {
     return this.sellRepository.softDelete(id);
   }
+  
 }
