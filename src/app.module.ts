@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BooksModule } from './books/books.module';
 import { AuthorsModule } from './authors/authors.module';
 import { SellsModule } from './sells/sells.module';
+import { Author } from './authors/entities/author.entity';
+import { Book } from './books/entities/book.entity';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { SellsModule } from './sells/sells.module';
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
+      entities: [Author, Book],
       synchronize: true,
       extra: {
         ssl: true,
