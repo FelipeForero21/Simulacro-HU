@@ -1,5 +1,5 @@
 import { Repository, In } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Book } from './entities/book.entity';
@@ -40,8 +40,29 @@ export class BooksService {
     return `This action returns a #${id} book`;
   }
 
-  update(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+  async update(id: number, updateBookDto: UpdateBookDto): Promise<void> {
+    const { title, author } = updateBookDto;
+
+    const book = await this.bookRepository.findOne({ where: { id }, relations: ['author'] });
+    if (!book) {
+      throw new NotFoundException(`Book with ID ${id} not found`);
+    }
+
+    if (title) {
+      book.title = title;
+    }
+
+    if (author) {
+      let authorEntity = await this.authorRepository.findOne({ where: { author } });
+      if (!authorEntity) {
+        authorEntity = new Author();
+        authorEntity.author = author;
+        await this.authorRepository.save(authorEntity);
+      }
+      book.author = [authorEntity];
+    }
+
+    await this.bookRepository.save(book);
   }
 
   remove(id: number) {
