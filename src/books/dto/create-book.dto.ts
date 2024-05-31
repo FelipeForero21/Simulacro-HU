@@ -1,18 +1,9 @@
-import {
-  IsInt,
-    IsString,
-  } from 'class-validator';
-  
-  export class CreateBookDto {
-    @IsString()
-    title: string;
+import { IsInt, IsString } from 'class-validator';
 
-    
-    @IsString()
-    author: string;
+export class CreateBookDto {
+  @IsString()
+  title: string;
 
-  }
-  
-  
-  
-  
+  @IsString()
+  author: string;
+}

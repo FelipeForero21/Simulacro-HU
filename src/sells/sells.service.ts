@@ -3,7 +3,8 @@ import { CreateSellDto } from './dto/create-sell.dto';
 import { UpdateSellDto } from './dto/update-sell.dto';
 import { Sell } from './entities/sell.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, MoreThanOrEqual } from 'typeorm';
+import { Repository } from 'typeorm';
+import { ApiOperation, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Book } from 'src/books/entities/book.entity';
 
 @Injectable()
@@ -15,6 +16,8 @@ export class SellsService {
     private bookRepository: Repository<Book>,
   ) {}
 
+  @ApiOperation({ summary: 'Create a new sell' }) // Documenta el método create
+  @ApiBody({ type: CreateSellDto })
   async create(createSellDto: CreateSellDto): Promise<Sell> {
     const { customer, bookId } = createSellDto;
 
@@ -30,19 +33,15 @@ export class SellsService {
     return this.sellRepository.save(sell);
   }
 
+  @ApiOperation({ summary: 'Get all sells' }) 
   async findAll(): Promise<Sell[]> {
     return this.sellRepository.find({
       relations: ['book'],
     });
   }
-  findOne(id: number) {
-    return `This action returns a #${id} sell`;
-  }
 
-  update(id: number, updateSellDto: UpdateSellDto) {
-    return `This action updates a #${id} sell`;
-  }
-
+  @ApiOperation({ summary: 'Soft delete sell by ID' }) 
+  @ApiParam({ name: 'id', type: 'number', description: 'Sell ID' })
   remove(id: number) {
     return this.sellRepository.softDelete(id);
   }

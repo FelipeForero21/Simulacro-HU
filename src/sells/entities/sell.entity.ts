@@ -10,11 +10,9 @@ export class Sell {
   @Column()
   customer: string;
 
-
-  @ManyToOne(() => Book, book => book.sell)
+  @ManyToOne(() => Book, (book) => book.sell)
   book: Book;
 
   @DeleteDateColumn()
   deletedAt?: Date;
-
 }

@@ -9,10 +9,10 @@ import { Sell } from 'src/sells/entities/sell.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Book]), 
-    TypeOrmModule.forFeature([Author]), 
+    TypeOrmModule.forFeature([Book]),
+    TypeOrmModule.forFeature([Author]),
     TypeOrmModule.forFeature([Sell]),
-    AuthorsModule, 
+    AuthorsModule,
   ],
   controllers: [BooksController],
   providers: [BooksService],

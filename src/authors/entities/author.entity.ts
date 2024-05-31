@@ -1,6 +1,13 @@
-import { IsNotEmpty, IsString } from "class-validator";
-import { Book } from "src/books/entities/book.entity";
-import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
+import { IsNotEmpty, IsString } from 'class-validator';
+import { Book } from 'src/books/entities/book.entity';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 @Entity()
 export class Author {
@@ -12,7 +19,7 @@ export class Author {
   @IsNotEmpty()
   author: string;
 
-  @ManyToMany(() => Book, book => book.author)
+  @ManyToMany(() => Book, (book) => book.author)
   @JoinTable()
   books: Book[];
 

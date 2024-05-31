@@ -1,32 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SellsService } from './sells.service';
 import { CreateSellDto } from './dto/create-sell.dto';
 import { UpdateSellDto } from './dto/update-sell.dto';
+import { ApiOperation, ApiParam, ApiBody, ApiTags } from '@nestjs/swagger';
 
 @Controller('sells')
+@ApiTags('Sells')
 export class SellsController {
   constructor(private readonly sellsService: SellsService) {}
 
-  @Post("/newSell")
+  @ApiOperation({ summary: 'Create a new sell' }) 
+  @ApiBody({ type: CreateSellDto })
+  @Post('/newSell')
   create(@Body() createSellDto: CreateSellDto) {
     return this.sellsService.create(createSellDto);
   }
 
-  @Get("/all")
+  @ApiOperation({ summary: 'Get all sells' }) 
+  @Get('/all')
   findAll() {
     return this.sellsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.sellsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSellDto: UpdateSellDto) {
-    return this.sellsService.update(+id, updateSellDto);
-  }
-
+  @ApiOperation({ summary: 'Soft delete sell by ID' })
+  @ApiParam({ name: 'id', type: 'string', description: 'Sell ID' })
   @Delete('/softDelete/:id')
   remove(@Param('id') id: string) {
     return this.sellsService.remove(+id);

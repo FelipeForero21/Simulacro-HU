@@ -12,7 +12,7 @@ import { APP_PIPE } from '@nestjs/core';
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
-      isGlobal: true
+      isGlobal: true,
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -27,15 +27,17 @@ import { APP_PIPE } from '@nestjs/core';
       extra: {
         ssl: true,
       },
-        }),
+    }),
     BooksModule,
     AuthorsModule,
-    SellsModule],
+    SellsModule,
+  ],
   controllers: [],
   providers: [
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
     },
-  ],})
+  ],
+})
 export class AppModule {}
