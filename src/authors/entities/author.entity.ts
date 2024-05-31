@@ -13,4 +13,6 @@ export class Author {
   @JoinTable()
   books: Book[];
 
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

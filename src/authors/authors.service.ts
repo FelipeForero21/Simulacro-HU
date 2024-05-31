@@ -17,19 +17,17 @@ export class AuthorsService {
     return this.authorRepository.save(createAuthorDto)
   }
 
-  findAll() {
-    return `This action returns all authors`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} author`;
+  async findAll(): Promise<Author[]> {
+    return await this.authorRepository.find();
   }
 
   update(id: number, updateAuthorDto: UpdateAuthorDto) {
-    return `This action updates a #${id} author`;
+    return this.authorRepository.update(id, updateAuthorDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} author`;
+    return this.authorRepository.softDelete(id);
   }
 }
+
+

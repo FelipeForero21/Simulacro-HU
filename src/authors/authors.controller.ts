@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { AuthorsService } from './authors.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
@@ -8,28 +8,21 @@ export class AuthorsController {
   constructor(private readonly authorsService: AuthorsService) {}
 
   @Post("/createAuthor")
-  create(@Body() createAuthorDto: CreateAuthorDto) {
-    console.log(createAuthorDto);
-    
+  create(@Body() createAuthorDto: CreateAuthorDto) {    
     return this.authorsService.create(createAuthorDto);
   }
 
-  @Get()
+  @Get('/all')
   findAll() {
     return this.authorsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authorsService.findOne(+id);
-  }
-
-  @Patch(':id')
+  @Put('/update/:id')
   update(@Param('id') id: string, @Body() updateAuthorDto: UpdateAuthorDto) {
     return this.authorsService.update(+id, updateAuthorDto);
   }
 
-  @Delete(':id')
+  @Delete('/softDelete/:id')
   remove(@Param('id') id: string) {
     return this.authorsService.remove(+id);
   }
