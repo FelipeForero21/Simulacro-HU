@@ -12,7 +12,7 @@ export class BooksController {
     return this.booksService.create(createBookDto);
   }
 
-  @Get()
+  @Get("/all")
   findAll() {
     return this.booksService.findAll();
   }
@@ -27,7 +27,7 @@ export class BooksController {
     return this.booksService.update(+id, updateBookDto);
   }
 
-  @Delete(':id')
+  @Delete('/softDelete/:id')
   remove(@Param('id') id: string) {
     return this.booksService.remove(+id);
   }

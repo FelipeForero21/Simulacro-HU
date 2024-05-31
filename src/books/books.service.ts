@@ -17,7 +17,6 @@ export class BooksService {
   async create(createBookDto: CreateBookDto): Promise<Book> {
     const { title, author } = createBookDto;
   
-    // Buscar o crear el autor según sea necesario
     let authorEntity = await this.authorRepository.findOne({ where: { author: author } });
     if (!authorEntity) {
       authorEntity = new Author();
@@ -29,13 +28,12 @@ export class BooksService {
     book.title = title;
     book.author = [authorEntity];
   
-    // Guardar el libro en la base de datos
     return this.bookRepository.save(book);
   }
   
 
-  findAll() {
-    return `This action returns all books`;
+  async findAll(): Promise<Book[]> {
+    return await this.bookRepository.find({ relations: ['author', 'sell'] });
   }
 
   findOne(id: number) {
@@ -47,6 +45,6 @@ export class BooksService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} book`;
+    return this.bookRepository.softDelete(id);
   }
 }
