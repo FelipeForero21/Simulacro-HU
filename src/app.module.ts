@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BooksModule } from './books/books.module';
@@ -6,6 +6,7 @@ import { AuthorsModule } from './authors/authors.module';
 import { SellsModule } from './sells/sells.module';
 import { Author } from './authors/entities/author.entity';
 import { Book } from './books/entities/book.entity';
+import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -31,6 +32,10 @@ import { Book } from './books/entities/book.entity';
     AuthorsModule,
     SellsModule],
   controllers: [],
-  providers: [],
-})
+  providers: [
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],})
 export class AppModule {}

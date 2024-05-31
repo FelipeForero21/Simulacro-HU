@@ -3,7 +3,7 @@ import { CreateSellDto } from './dto/create-sell.dto';
 import { UpdateSellDto } from './dto/update-sell.dto';
 import { Sell } from './entities/sell.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, MoreThanOrEqual  } from 'typeorm';
+import { Repository, MoreThanOrEqual } from 'typeorm';
 import { Book } from 'src/books/entities/book.entity';
 
 @Injectable()
@@ -30,8 +30,6 @@ export class SellsService {
     return this.sellRepository.save(sell);
   }
 
-
-
   async findAll(): Promise<Sell[]> {
     return this.sellRepository.find({
       relations: ['book'],
@@ -48,9 +46,4 @@ export class SellsService {
   remove(id: number) {
     return this.sellRepository.softDelete(id);
   }
-
-
-
-
-
 }

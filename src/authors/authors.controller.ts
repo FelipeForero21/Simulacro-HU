@@ -19,6 +19,7 @@ export class AuthorsController {
   }
 
   @Put('/update/:id')
+  @UsePipes(new ValidationPipe({ transform: true }))
   update(@Param('id') id: string, @Body() updateAuthorDto: UpdateAuthorDto) {
     return this.authorsService.update(+id, updateAuthorDto);
   }
