@@ -12,7 +12,7 @@ export class SellsController {
     return this.sellsService.create(createSellDto);
   }
 
-  @Get()
+  @Get("/all")
   findAll() {
     return this.sellsService.findAll();
   }
@@ -27,7 +27,7 @@ export class SellsController {
     return this.sellsService.update(+id, updateSellDto);
   }
 
-  @Delete(':id')
+  @Delete('/softDelete/:id')
   remove(@Param('id') id: string) {
     return this.sellsService.remove(+id);
   }

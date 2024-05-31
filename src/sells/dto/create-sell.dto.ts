@@ -6,6 +6,7 @@ export class CreateSellDto {
 
   @IsInt()
   bookId: number;
+
 }
 
   

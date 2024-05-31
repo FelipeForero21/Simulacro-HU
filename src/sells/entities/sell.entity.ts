@@ -10,6 +10,7 @@ export class Sell {
   @Column()
   customer: string;
 
+
   @ManyToOne(() => Book, book => book.sell)
   book: Book;
 

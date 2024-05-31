@@ -32,10 +32,11 @@ export class SellsService {
 
 
 
-  findAll() {
-    return `This action returns all sells`;
+  async findAll(): Promise<Sell[]> {
+    return this.sellRepository.find({
+      relations: ['book'],
+    });
   }
-
   findOne(id: number) {
     return `This action returns a #${id} sell`;
   }
@@ -45,7 +46,7 @@ export class SellsService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} sell`;
+    return this.sellRepository.softDelete(id);
   }
 
 
