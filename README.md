@@ -192,9 +192,8 @@ Si deseas contribuir a este proyecto, por favor, abre un issue o envía un pull 
 - **Requisitos**: Lista las dependencias necesarias para ejecutar el proyecto.
 - **Instalación**: Instrucciones para clonar el repositorio, instalar las dependencias y configurar las variables de entorno.
 - **Ejecución**: Pasos para compilar y ejecutar el servidor.
-- **Uso de Swagger**: Indica cómo acceder a la documentación de la API generada por Swagger.
+- **Uso de Swagger o Postman**: Indica cómo acceder a la documentación de la API generada por Swagger.
 - **Estructura del Proyecto**: Describe la estructura del proyecto y los archivos principales.
 - **Ejemplos de Uso de la API**: Proporciona ejemplos de cómo usar algunos endpoints de la API.
 - **Contribuciones**: Instrucciones sobre cómo contribuir al proyecto.
-- **Licencia**: Información sobre la licencia del proyecto.
 
